@@ -1,4 +1,12 @@
-# aws-terragrunt
+# aws-terragrunt Architecture for IAC
+
+![image](https://github.com/user-attachments/assets/aaeb6721-6058-440d-8bac-ec6d2959f2f9)
+![image](https://github.com/user-attachments/assets/852cc8c3-1d37-4fce-a842-413cb063b400)
+
+
+
+
+
 
 .
 ├── global/
