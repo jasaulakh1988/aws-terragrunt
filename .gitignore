@@ -1,0 +1,15 @@
+# Ignore all hidden files (files that start with a dot)
+.*
+
+# Ignore all hidden files and directories recursively
+**/.*
+
+# Ignore Terragrunt cache directories
+.terragrunt-cache/
+
+# Ignore Terraform provider directories
+.terraform/
+.terraform.lock.hcl
+
+# But don't ignore the .gitignore file itself
+!.gitignore

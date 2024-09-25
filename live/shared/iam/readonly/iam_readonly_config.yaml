@@ -1,0 +1,26 @@
+groups:
+  - name: ReadOnly
+    policies:
+      - ReadOnlyAccess
+    custom_policies:
+      - name: ReadOnlyCustomPolicy
+        description: Custom read-only policy
+        policy_document:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - cloudwatch:GetDashboard
+                - logs:FilterLogEvents
+              Resource: "*"
+
+users:
+  - username: carol.readonly
+    groups:
+      - ReadOnly
+    access_key: false
+  - username: david.readonly
+    groups:
+      - ReadOnly
+    access_key: false
+

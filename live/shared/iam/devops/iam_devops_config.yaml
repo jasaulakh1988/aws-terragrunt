@@ -1,0 +1,40 @@
+groups:
+  - name: DevOps
+    policies:
+      - AmazonEC2FullAccess
+      - AmazonS3FullAccess
+      - AmazonRDSFullAccess
+      - AWSLambdaFullAccess
+    custom_policies:
+      - name: DevOpsCustomPolicy
+        description: Custom policy for DevOps team
+        policy_document:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - iam:CreateServiceLinkedRole
+              Resource: "*"
+
+users:
+  - username: alice.devops
+    groups:
+      - DevOps
+    access_key: false
+  - username: bob.devops
+    groups:
+      - DevOps
+    access_key: false
+
+roles:
+  - name: DevOpsAssumeRole
+    assume_role_policy:
+      Version: "2012-10-17"
+      Statement:
+        - Effect: Allow
+          Principal:
+            AWS: arn:aws:iam::203918884813:root
+          Action: sts:AssumeRole
+    policies:
+      - AmazonEC2FullAccess
+

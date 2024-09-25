@@ -1,0 +1,17 @@
+groups:
+  - name: Engineering
+    policies:
+      - AmazonEC2FullAccess
+      - AmazonS3FullAccess
+    custom_policies: []
+
+users:
+  - username: eve.engineering
+    groups:
+      - Engineering
+    access_key: false
+  - username: frank.engineering
+    groups:
+      - Engineering
+    access_key: false
+
