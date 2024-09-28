@@ -23,7 +23,7 @@ locals {
 
 # Create Public Subnets
 resource "aws_subnet" "public" {
-  for_each = { for subnet in var.public_subnets : "${subnet.availability_zone}-${subnet.service}" => subnet }
+  for_each = { for subnet in var.public_subnets : "${subnet.availability_zone}-${subnet.servicetype}" => subnet }
 
   vpc_id            = var.vpc_id
   cidr_block        = each.value.cidr_block
@@ -33,7 +33,8 @@ resource "aws_subnet" "public" {
   tags = merge(
     var.tags,
     {
-      "Name" = "public-subnet-${each.value.service}-${local.az_name_to_id_suffix[each.value.availability_zone]}-${var.env}"
+      "Name" = "public-subnet-${each.value.servicetype}-${local.az_name_to_id_suffix[each.value.availability_zone]}-${var.env}"
+      "servicetype" = each.value.servicetype
     }
   )
 }

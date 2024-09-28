@@ -21,9 +21,9 @@ locals {
   }
 }
 
-# Create Private Subnets
+
 resource "aws_subnet" "private" {
-  for_each = { for subnet in var.private_subnets : "${subnet.availability_zone}-${subnet.service}" => subnet }
+  for_each = { for subnet in var.private_subnets : "${subnet.availability_zone}-${subnet.servicetype}" => subnet }
 
   vpc_id            = var.vpc_id
   cidr_block        = each.value.cidr_block
@@ -32,10 +32,12 @@ resource "aws_subnet" "private" {
   tags = merge(
     var.tags,
     {
-      "Name" = "private-subnet-${each.value.service}-${local.az_name_to_id_suffix[each.value.availability_zone]}-${var.env}"
+      "Name"        = "private-subnet-${each.value.servicetype}-${local.az_name_to_id_suffix[each.value.availability_zone]}-${var.env}",
+      "servicetype" = each.value.servicetype  # Add this line
     }
   )
 }
+
 
 # Create Private Route Tables
 resource "aws_route_table" "private" {

@@ -3,7 +3,7 @@ variable "private_subnets" {
   type = list(object({
     cidr_block        = string
     availability_zone = string
-    service           = string  # Add service field
+    servicetype           = string  # Add service field
   }))
 }
 
